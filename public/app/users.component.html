@@ -1,0 +1,205 @@
+<h1>
+    <i class="fa fa-users" aria-hidden="true"></i> Users
+</h1>
+
+<div class="row">
+    <div class="row">
+        <div class="col-md-2 col-md-offset-10">
+            <button class="btn btn-success" (click)="addUser()">
+                <i class="fa fa-user-plus" aria-hidden="true"></i> New User
+            </button>
+        </div>
+    </div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Display Name</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Created</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.username}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.created_at}}</td>
+            <td><a (click)="editUser(user)" class="shs-link label label-info">
+                <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<!-- Edit user modal -->
+<div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="editModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit User Profile</h4>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="submitEdit()" *ngIf="showEditProfileForm" #editForm="ngForm">
+                        <div class="form-group"
+                             [ngClass]="{'has-error': !userNameInp.valid && !userNameInp.pristine  }">
+                            <label for="name">Username*</label>
+                            <input [(ngModel)]="editedUser.username" name="username"
+                                   type="text" class="form-control" id="username"
+                                   required #userNameInp="ngModel">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Display Name</label>
+                            <input [(ngModel)]="editedUser.name" name="name"
+                                   type="text" class="form-control" id="name">
+                        </div>
+
+                        <div class="form-group"
+                             [ngClass]="{'has-error': !emailInp.valid && !emailInp.pristine  }">
+                            <label for="email">Email*</label>
+                            <input [(ngModel)]="editedUser.email" name="email"
+                                   type="email" class="form-control" id="email"
+                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                   required #emailInp="ngModel">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">The Role*</label>
+                            <select [(ngModel)]="editedUser.role" name="role"
+                                    class="form-control" id="role" required>
+                                <option *ngFor="let role of roles" [value]="role.roleId">
+                                    {{role.roleName}}</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary"
+                                [disabled]="!editForm.form.valid">
+                            Submit</button>
+                    </form>
+                <div class="alert alert-success" *ngIf="showSuccessMes">
+                    User profile successfully updated!&nbsp;
+                    <a class="shs-link"
+                       (click)="showEditProfileForm=true;showSuccessMes=false;">
+                        (Re-edit)
+                    </a>
+                </div>
+                <div class="alert alert-danger alert-dismissible" *ngIf="showErrorMes">
+                    <button type="button" class="close" (click)="showErrorMes=false;">
+                        <span aria-hidden="true">&times;</span></button>
+                    <strong>Error!</strong> {{errorMes}}
+                </div>
+                <hr />
+                <h4>Reset Password</h4>
+                <form (ngSubmit)="updatePassword()"
+                      *ngIf="showPwdForm" #updatePasswordForm="ngForm">
+                    <div class="form-group"
+                         [ngClass]="{'has-error': !passwordInp.valid && !passwordInp.pristine  }">
+                        <label for="email">New Password*</label>
+                        <input [(ngModel)]="editedUser2.password" name="password"
+                               type="text" class="form-control" id="password"
+                               pattern=".{8,50}"
+                               required #passwordInp="ngModel">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"
+                            [disabled]="!updatePasswordForm.form.valid">
+                        Reset Password</button>
+
+                </form>
+                <div class="alert alert-success" *ngIf="showPwdSuccessMes">
+                    User password successfully updated!&nbsp;
+                    <a class="shs-link"
+                       (click)="showPwdForm=true;showPwdSuccessMes=false;">
+                        (Re-edit)
+                    </a>
+                </div>
+                <div class="alert alert-danger alert-dismissible" *ngIf="showPwdErrMes">
+                    <button type="button" class="close" (click)="showPwdErrMes=false;">
+                        <span aria-hidden="true">&times;</span></button>
+                    <strong>Error!</strong> {{errorMes}}
+                </div>
+                <hr />
+                <button class="btn btn-danger" (click)="deleteUser()">
+                    Delete User</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add new user modal -->
+<div bsModal #addModal="bs-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="addModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add New User</h4>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="submitNew()" *ngIf="showNewForm" #newUserForm="ngForm">
+                    <div class="form-group"
+                         [ngClass]="{'has-error': !newUserNameInp.valid && !newUserNameInp.pristine  }">
+                        <label for="name">Username*</label>
+                        <input [(ngModel)]="editedUser.username" name="username"
+                               type="text" class="form-control" id="new-username"
+                               required #newUserNameInp="ngModel">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Display Name</label>
+                        <input [(ngModel)]="editedUser.name" name="new-name"
+                               type="text" class="form-control" id="new-name">
+                    </div>
+
+                    <div class="form-group"
+                         [ngClass]="{'has-error': !newEmailInp.valid && !newEmailInp.pristine  }">
+                        <label for="email">Email*</label>
+                        <input [(ngModel)]="editedUser.email" name="new-email"
+                               type="email" class="form-control" id="new-email"
+                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                               required #newEmailInp="ngModel">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">The Role*</label>
+                        <select [(ngModel)]="editedUser.role" name="role"
+                                class="form-control" id="new-role" required>
+                            <option *ngFor="let role of roles" [value]="role.roleId">
+                                {{role.roleName}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group"
+                         [ngClass]="{'has-error': !pwdNewInp.valid && !pwdNewInp.pristine  }">
+                        <label for="email">New Password*</label>
+                        <input [(ngModel)]="editedUser.password" name="password"
+                               type="text" class="form-control" id="new-password"
+                               pattern=".{8,50}"
+                               required #pwdNewInp="ngModel">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"
+                            [disabled]="!newUserForm.form.valid">
+                        Submit</button>
+                </form>
+                <div class="alert alert-success" *ngIf="showNewSuccessMes">
+                    User profile successfully updated!&nbsp;
+                </div>
+                <div class="alert alert-danger alert-dismissible" *ngIf="showNewErrorMes">
+                    <button type="button" class="close" (click)="showNewErrorMes=false;">
+                        <span aria-hidden="true">&times;</span></button>
+                    <strong>Error!</strong> {{errorNewMes}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

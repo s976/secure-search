@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+<div class="row" style="margin-top:10%">
+    <div class="col-md-4 col-md-offset-4">
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control"
+                       id="username" required name="username">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password</label>
+                <input required type="password" class="form-control"
+                       id="pwd" name="pwd">
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
