@@ -12,11 +12,11 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var users_component_1 = require('./users.component');
 var home_component_1 = require("./home.component");
-var login_component_1 = require("./login.component");
+var manage_docs_component_1 = require("./manage-docs.component");
 var routes = [
     { path: '', component: home_component_1.HomeComponent },
     { path: 'users', component: users_component_1.UsersComponent },
-    { path: 'login', component: login_component_1.LoginComponent }
+    { path: 'manage-docs', component: manage_docs_component_1.ManageDocsComponent },
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

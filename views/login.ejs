@@ -20,7 +20,14 @@
 
 <div class="row" style="margin-top:10%">
     <div class="col-md-4 col-md-offset-4">
-        <form>
+
+        <% if (messages[0]) { %>
+        <div class="alert alert-danger">
+            <%= messages[0] %>
+        </div>
+        <% } %>
+
+        <form action="/login" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control"
@@ -29,7 +36,7 @@
             <div class="form-group">
                 <label for="pwd">Password</label>
                 <input required type="password" class="form-control"
-                       id="pwd" name="pwd">
+                       id="password" name="password">
             </div>
             <button type="submit" class="btn btn-primary">Log In</button>
         </form>

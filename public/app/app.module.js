@@ -13,12 +13,13 @@ var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
+var ng2_file_upload_1 = require("ng2-file-upload");
 var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var users_component_1 = require('./users.component');
 var users_service_1 = require("./users.service");
 var home_component_1 = require("./home.component");
-var login_component_1 = require("./login.component");
+var manage_docs_component_1 = require('./manage-docs.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -35,7 +36,9 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 users_component_1.UsersComponent,
                 home_component_1.HomeComponent,
-                login_component_1.LoginComponent
+                manage_docs_component_1.ManageDocsComponent,
+                ng2_file_upload_1.FileSelectDirective,
+                ng2_file_upload_1.FileDropDirective
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: [users_service_1.UsersService],

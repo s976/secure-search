@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
+var ensureLogin = require('connect-ensure-login');
 
 var User = require('./libs/user');
 
@@ -16,8 +18,12 @@ passport.use(new Strategy(
     function(username, password, cb) {
         User.findOne({username:username}, function(err, user) {
             if (err) { return cb(err); }
-            if (!user) { return cb(null, false); }
-            if (!user.checkPwd(password)) { return cb(null, false); }
+            if (!user) {
+                return cb(null, false, { message: 'Incorrect username.' });
+            }
+            if (!user.checkPwd(password)) {
+                return cb(null, false, { message: 'Incorrect password.' });
+            }
             return cb(null, user);
         });
     }));
@@ -34,8 +40,6 @@ passport.deserializeUser(function(id, cb) {
 });
 
 
-
-
 var app = express();
 
 // view engine setup
@@ -50,6 +54,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(flash());
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -57,20 +62,30 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/login',function(req,res,next){
-    res.render('login', {title:'Login'});
+    res.render('login', {title:'Login',messages: req.flash('error') } );
 });
 
-app.post('/api/login',
+app.post('/login',
     passport.authenticate('local', {
-        failureRedirect: '/login'
-    }),
-    function(req, res) {
+        successReturnToOrRedirect: '/', //Redirecting depends on connect-ensure-login module
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+
+app.get('/logout',
+    function(req, res){
+        req.logout();
         res.redirect('/');
     });
 
-
-app.use('/', front);
 app.use('/api',api);
+
+//Front URLs
+app.use('/',
+    ensureLogin.ensureLoggedIn(),
+    front);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

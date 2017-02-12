@@ -6,10 +6,10 @@ router.get(
     [
         '/',
         '/users',
-        '/login'
+        '/manage-docs'
     ],
     function(req, res, next) {
-        res.render('index', { title: 'Express' });
+        res.render('index', { title: 'Talmud' });
     });
 
 module.exports = router;
