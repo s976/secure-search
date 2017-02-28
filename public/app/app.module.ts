@@ -13,6 +13,7 @@ import { UsersComponent } from './users.component';
 import {UsersService} from "./users.service";
 import {HomeComponent} from "./home.component";
 import { ManageDocsComponent } from './manage-docs.component';
+import {DocsService} from "./docs.service";
 
 
 
@@ -33,6 +34,6 @@ import { ManageDocsComponent } from './manage-docs.component';
       FileDropDirective
   ],
     bootstrap:    [ AppComponent ],
-    providers: [UsersService],
+    providers: [UsersService,DocsService],
 })
 export class AppModule { }

@@ -20,6 +20,7 @@ var users_component_1 = require('./users.component');
 var users_service_1 = require("./users.service");
 var home_component_1 = require("./home.component");
 var manage_docs_component_1 = require('./manage-docs.component');
+var docs_service_1 = require("./docs.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -41,7 +42,7 @@ var AppModule = (function () {
                 ng2_file_upload_1.FileDropDirective
             ],
             bootstrap: [app_component_1.AppComponent],
-            providers: [users_service_1.UsersService],
+            providers: [users_service_1.UsersService, docs_service_1.DocsService],
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
