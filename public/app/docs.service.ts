@@ -9,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class DocsService{
     private docsUrl = 'api/docs';
+    private searchUrl = 'api/search';
 
     constructor(private http: Http){}
 
@@ -33,6 +34,37 @@ export class DocsService{
 
     getDocs() : Promise<Doc[]> {
         return this.http.get(this.docsUrl)
+            .toPromise()
+            .then(
+                response=>this.transformResponse(response),
+                error=>{
+                    throw error.json();
+                }
+            );
+    }
+
+    updateDoc(doc : Doc) : Promise<Doc> {
+        return this.http.post(this.docsUrl + '/' + doc._id, doc)
+            .toPromise()
+            .then(
+                response => this.transformResponse(response), //on success
+                error => {                           //on fail
+                    throw error.json();
+                }
+            );
+    }
+
+    deleteDoc(doc : Doc) : Promise<any> {
+        return this.http.delete(this.docsUrl + '/' + doc._id)
+            .toPromise()
+            .then(
+                response => response.json(),
+                error => {throw error.json();}
+            )
+    }
+
+    searchDocs(key : string) : Promise<Doc[]>{
+        return this.http.get(this.searchUrl + '/' + key)
             .toPromise()
             .then(
                 response=>this.transformResponse(response),

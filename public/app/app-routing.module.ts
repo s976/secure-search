@@ -6,7 +6,8 @@ import {HomeComponent} from "./home.component";
 import {ManageDocsComponent} from "./manage-docs.component";
 
 const routes: Routes = [
-    { path:  '', component: HomeComponent },
+    { path:  'home', component: HomeComponent },
+    { path: '',   redirectTo: '/home', pathMatch: 'full' },
     { path: 'users',  component: UsersComponent },
     { path: 'manage-docs',  component: ManageDocsComponent },
 ];

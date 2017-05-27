@@ -1,0 +1,25 @@
+<form (ngSubmit)="search(keyword)" #keyForm="ngForm" style="margin-top: 15px;margin-bottom: 15px;">
+    <div class="input-group">
+        <input [(ngModel)]="keyword" name="keyword" id="keyword"
+               required #userNameInp="ngModel"
+                type="text" class="form-control" placeholder="Поиск фразы...">
+        <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit">Поиск</button>
+      </span>
+    </div>
+</form>
+
+<div class="row" *ngIf="resultMessage">
+<div class="alert alert-warning" [innerHtml]="resultMessage"></div>
+</div>
+
+<div class="row" *ngFor="let res of resultDocs">
+    <h3>{{res.doc.file_name}}</h3>
+    <div class="col-lg12 result-cont">
+        <table class="table table-bordered" *ngFor="let piece of res.pieces">
+            <tr><td [innerHtml]="piece"></td></tr>
+        </table>
+        <div class="alert alert-warning" [innerHtml]="res.message"
+             *ngIf="res.message"></div>
+    </div>
+</div>

@@ -6727,3 +6727,10 @@ nav + div.container {
 .shs-link {
   cursor: pointer;
 }
+
+.highlight{background-color: yellow;}
+
+a.active {
+  color: #fff !important;
+  background-color: #080808 !important;
+}

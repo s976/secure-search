@@ -7,16 +7,30 @@ var multer  = require('multer');
 var User = require('../libs/user');
 var Doc = require('../libs/doc');
 
+var PrepareRes = require('../libs/prepare');
+var permissions = require('../libs/permissions');
 
-/* Закомментировал на время разработки
-router.use(function(req,res,next){
-    if(req.isAuthenticated()){
+
+if (settings.SECURE_API){ //На время разработки можно не проверять подключенность
+    router.use(function(req,res,next){
+        if(req.isAuthenticated()){
+            next();
+        } else {
+            res.status(401).json({errMessage:'Please, log in!'});
+        }
+    });
+}
+
+/**
+ * Start Users API
+ */
+
+router.use('/users',function (req,res,next) {
+    if ( permissions.accessOnlyForRole(req,res,4,'Users API') ){
         next();
-    } else {
-        res.status(401).json({errMessage:'Please, log in!'});
     }
 });
-*/
+
 
 /* GET list of users */
 router.get('/users', function(req, res, next) {
@@ -130,6 +144,9 @@ var upload = multer({
 
 
 router.post('/file', upload, function(req,res,next){
+    if(!permissions.accessOnlyForRole(req,res,4,'Upload File')){
+        return false;
+    }
     Doc.addFile(req.file,function(err,doc){
         if(err) {
             res.status(400).json({errMessage:err.message});
@@ -141,6 +158,12 @@ router.post('/file', upload, function(req,res,next){
 });
 
 /*     DOCS API    */
+router.use('/docs',function (req,res,next) {
+    if ( permissions.accessOnlyForRole(req,res,4,'Docs API') ){
+        next();
+    }
+});
+
 /* GET full list of docs */
 router.get('/docs',function (req,res,next) {
     Doc.find({},{
@@ -207,5 +230,48 @@ router.post('/docs/:id',function(req,res,next){
 
    });
 });
+
+//Delete doc by id
+router.delete('/docs/:id',function(req,res,next){
+    Doc.findByIdAndRemove(req.params.id,function (err,doc) {
+        console.log("Remove:");
+        console.log(doc);
+        if(err){
+            res.status(400).json({errMessage:err.message});
+            console.error(err);
+            return false;
+        }
+        if(!doc){
+            res.status(400).json({errMessage:'Doc not found'});
+            return false;
+        }
+        res.json({message:'Doc successfully deleted!'});
+    });
+});
+
+router.use('/search',function (req,res,next) {
+    if ( permissions.accessOnlyForRole(req,res,0,'Search API') ){
+        next();
+    }
+});
+
+/* Get (search) docs by keyword  */
+router.get('/search/:key',function(req,res,next){
+    Doc.findByKey(req.params.key,function(err,docs){
+        if(err){
+            res.status(400).json({errMessage:err.message});
+            return false;
+        }
+        if(!docs){
+            res.status(400).json({errMessage:'Document not found'});
+            return false;
+        }
+        var prepareRes = new PrepareRes(docs);
+        prepareRes.limit();
+        res.json( prepareRes.response );
+    })
+
+});
+
 
 module.exports = router;

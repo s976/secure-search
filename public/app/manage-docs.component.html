@@ -10,6 +10,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th></th>
                 <th>Filename</th>
                 <th>Author</th>
                 <th>Created</th>
@@ -17,6 +18,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let doc of docs">
+                <td><a (click)="editDoc(doc)" class="shs-link label label-info">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a></td>
                 <td>{{doc.file_name}}</td>
                 <td>{{doc.author}}</td>
                 <td>{{doc.uploaded_at}}</td>
@@ -135,16 +138,50 @@
             <div class="modal-body">
                 <form (ngSubmit)="submitDoc()"  #editDocForm="ngForm">
                     <div class="form-group">
-                        <label for="author">Username*</label>
+                        <label for="author">Переводчик</label>
                         <input [(ngModel)]="editedDoc.author" name="author"
                                type="text" class="form-control" id="author"
-                               required #editDocAuthorInp="ngModel">
+                               #editDocAuthorInp="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="revisor">Мевакер</label>
+                        <input [(ngModel)]="editedDoc.revisor" name="revisor"
+                               type="text" class="form-control" id="revisor"
+                               #editDocRevisorInp="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Лит. редактор</label>
+                        <input [(ngModel)]="editedDoc.editor" name="editor"
+                               type="text" class="form-control" id="editor"
+                               #editDocEditorInp="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Трактат</label>
+                        <input [(ngModel)]="editedDoc.masechet" name="masechet"
+                               type="text" class="form-control" id="masechet"
+                               #editDocMasechetInp="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Даф</label>
+                        <input [(ngModel)]="editedDoc.daf" name="daf"
+                               type="text" class="form-control" id="daf"
+                               #editDocDafInp="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Пометки</label>
+                        <textarea [(ngModel)]="editedDoc.remarks" name="remarks"
+                               class="form-control" id="remarks"
+                               #editDocRemarksInp="ngModel"></textarea>
                     </div>
 
 
                     <button type="submit" class="btn btn-primary"
                             [disabled]="!editDocForm.form.valid">
-                        Submit</button>
+                        Готово</button>
+
+                    <button type="button" class="btn btn-danger" (click)="deleteDoc()">
+                        Удалить документ
+                    </button>
                 </form>
                 <div class="alert alert-success" *ngIf="showEditSuccessMes">
                     Document Info successfully updated!&nbsp;

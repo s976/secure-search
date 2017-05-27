@@ -5,6 +5,7 @@ var router = express.Router();
 router.get(
     [
         '/',
+        '/home',
         '/users',
         '/manage-docs'
     ],

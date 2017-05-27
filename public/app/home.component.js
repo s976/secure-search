@@ -12,16 +12,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by shimon on 05/12/2016.
  */
 var core_1 = require('@angular/core');
+var docs_service_1 = require('./docs.service');
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(docsService) {
+        this.docsService = docsService;
+        this.searchUrl = 'api/search';
     }
+    HomeComponent.prototype.search = function (key) {
+        var _this = this;
+        this.docsService.searchDocs(key)
+            .then(function (docs) {
+            console.log(docs);
+            _this.outputResults(docs);
+        }, function (error) { });
+    };
+    HomeComponent.prototype.outputResults = function (results) {
+        this.resultDocs = results.docs;
+        this.resultMessage = results.message;
+    };
     HomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'home',
-            template: "<h1>Home</h1>"
+            templateUrl: 'home.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [docs_service_1.DocsService])
     ], HomeComponent);
     return HomeComponent;
 }());

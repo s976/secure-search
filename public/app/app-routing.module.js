@@ -14,7 +14,8 @@ var users_component_1 = require('./users.component');
 var home_component_1 = require("./home.component");
 var manage_docs_component_1 = require("./manage-docs.component");
 var routes = [
-    { path: '', component: home_component_1.HomeComponent },
+    { path: 'home', component: home_component_1.HomeComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'users', component: users_component_1.UsersComponent },
     { path: 'manage-docs', component: manage_docs_component_1.ManageDocsComponent },
 ];
