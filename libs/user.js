@@ -53,9 +53,6 @@ userSchema.methods.checkPwd = function (pwd) {
     return this.model('User').hashPwd(pwd,this.salt) == this.password;
 };
 
-userSchema.methods.cry = function () {
-    console.log(this.username + ' say uaaaaaaaa!!!');
-};
 
 /** @class User */
 var User = mongoose.model('User', userSchema);

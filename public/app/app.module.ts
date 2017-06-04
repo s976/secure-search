@@ -13,7 +13,9 @@ import { UsersComponent } from './users.component';
 import {UsersService} from "./users.service";
 import {HomeComponent} from "./home.component";
 import { ManageDocsComponent } from './manage-docs.component';
+import { JournalComponent } from './journal.component';
 import {DocsService} from "./docs.service";
+import {JournalService} from "./journal.service";
 
 
 
@@ -30,10 +32,11 @@ import {DocsService} from "./docs.service";
       UsersComponent,
       HomeComponent,
       ManageDocsComponent,
+      JournalComponent,
       FileSelectDirective,
       FileDropDirective
   ],
     bootstrap:    [ AppComponent ],
-    providers: [UsersService,DocsService],
+    providers: [UsersService,DocsService,JournalService],
 })
 export class AppModule { }

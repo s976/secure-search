@@ -10,20 +10,29 @@ var flash = require('connect-flash');
 var ensureLogin = require('connect-ensure-login');
 
 var User = require('./libs/user');
+var Journal = require('./libs/journal');
 
 var front = require('./routes/front');
 var api = require('./routes/api');
 
-passport.use(new Strategy(
-    function(username, password, cb) {
+
+
+passport.use(new Strategy({ "passReqToCallback": true },
+    function(req,username, password, cb) {
         User.findOne({username:username}, function(err, user) {
             if (err) { return cb(err); }
             if (!user) {
+                req.user = {username: username}; //Prepare for Journal
+                Journal.newRecord(req,'login','Incorrect username');
                 return cb(null, false, { message: 'Incorrect username.' });
             }
             if (!user.checkPwd(password)) {
+                req.user = {username: username}; //Prepare for Journal
+                Journal.newRecord(req,'login','Incorrect password');
                 return cb(null, false, { message: 'Incorrect password.' });
             }
+            req.user = user; //Prepare for Journal
+            Journal.newRecord(req,'login','ok');
             return cb(null, user);
         });
     }));

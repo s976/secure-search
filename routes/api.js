@@ -6,6 +6,7 @@ var multer  = require('multer');
 
 var User = require('../libs/user');
 var Doc = require('../libs/doc');
+var Journal = require('../libs/journal');
 
 var PrepareRes = require('../libs/prepare');
 var permissions = require('../libs/permissions');
@@ -269,9 +270,22 @@ router.get('/search/:key',function(req,res,next){
         var prepareRes = new PrepareRes(docs);
         prepareRes.limit();
         res.json( prepareRes.response );
+        Journal.newRecord(req,'search',req.params.key);
+
     })
 
 });
 
+
+router.get('/journal',function(req,res,next){
+    Journal.find({},{__v:0},function (err,records){
+        if (err) {
+            res.status(400).json({errMessage:err.message});
+            console.log(err);
+        } else {
+            res.json(records);
+        }
+    });
+});
 
 module.exports = router;

@@ -20,7 +20,9 @@ var users_component_1 = require('./users.component');
 var users_service_1 = require("./users.service");
 var home_component_1 = require("./home.component");
 var manage_docs_component_1 = require('./manage-docs.component');
+var journal_component_1 = require('./journal.component');
 var docs_service_1 = require("./docs.service");
+var journal_service_1 = require("./journal.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -38,11 +40,12 @@ var AppModule = (function () {
                 users_component_1.UsersComponent,
                 home_component_1.HomeComponent,
                 manage_docs_component_1.ManageDocsComponent,
+                journal_component_1.JournalComponent,
                 ng2_file_upload_1.FileSelectDirective,
                 ng2_file_upload_1.FileDropDirective
             ],
             bootstrap: [app_component_1.AppComponent],
-            providers: [users_service_1.UsersService, docs_service_1.DocsService],
+            providers: [users_service_1.UsersService, docs_service_1.DocsService, journal_service_1.JournalService],
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
