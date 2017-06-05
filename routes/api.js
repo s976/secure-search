@@ -276,6 +276,12 @@ router.get('/search/:key',function(req,res,next){
 
 });
 
+router.use('/journal',function (req,res,next) {
+    if ( permissions.accessOnlyForRole(req,res,4,'Journal') ){
+        next();
+    }
+});
+
 
 router.get('/journal',function(req,res,next){
     Journal.find({},{__v:0},function (err,records){
