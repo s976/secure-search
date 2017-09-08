@@ -14,6 +14,8 @@ export class JournalComponent implements OnInit{
     constructor(private journalService : JournalService){}
 
     records : any[] = [];
+    limit : number = 10;
+    page : number = 1;
 
 
     ngOnInit() : void{
@@ -21,7 +23,7 @@ export class JournalComponent implements OnInit{
     }
 
     getRecords() : void {
-        this.journalService.getRecords()
+        this.journalService.getRecords({limit:this.limit,page:this.page})
             .then(
                 records=>this.records=records,
                 error=>{

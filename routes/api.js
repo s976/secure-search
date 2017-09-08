@@ -10,7 +10,7 @@ var Journal = require('../libs/journal');
 
 var PrepareRes = require('../libs/prepare');
 var permissions = require('../libs/permissions');
-
+//k
 
 if (settings.SECURE_API){ //На время разработки можно не проверять подключенность
     router.use(function(req,res,next){
@@ -276,22 +276,30 @@ router.get('/search/:key',function(req,res,next){
 
 });
 
+/*
 router.use('/journal',function (req,res,next) {
     if ( permissions.accessOnlyForRole(req,res,4,'Journal') ){
         next();
     }
 });
+*/
 
+router.post('/journal',function(req,res,next){
+    var limit = req.body.limit || 100;
+    var skip = (req.body.page-1) * limit;
+    Journal.find()
+        .skip(skip)
+        .sort('-_id')
+        .limit(limit)
+        .exec(function (err,records){
+            if (err) {
+                res.status(400).json({errMessage:err.message});
+                console.log(err);
+            } else {
+                res.json(records);
+            }
+        });
 
-router.get('/journal',function(req,res,next){
-    Journal.find({},{__v:0},function (err,records){
-        if (err) {
-            res.status(400).json({errMessage:err.message});
-            console.log(err);
-        } else {
-            res.json(records);
-        }
-    });
 });
 
 module.exports = router;

@@ -38,9 +38,9 @@ var JournalService = (function () {
             return response;
         }
     };
-    JournalService.prototype.getRecords = function () {
+    JournalService.prototype.getRecords = function (args) {
         var _this = this;
-        return this.http.get(this.journalUrl)
+        return this.http.post(this.journalUrl, args)
             .toPromise()
             .then(function (response) { return _this.transformResponse(response); }, function (error) {
             throw error.json();

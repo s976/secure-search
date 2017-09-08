@@ -30,8 +30,8 @@ export class JournalService{
         }
     }
 
-    getRecords() : Promise<any> {
-        return this.http.get(this.journalUrl)
+    getRecords(args : any) : Promise<any> {
+        return this.http.post(this.journalUrl,args)
             .toPromise()
             .then(
                 response=>this.transformResponse(response),

@@ -4,7 +4,13 @@
 
 <div class="row">
     <div class="row">
-        <div class="col-md-2 col-md-offset-10">
+        <div class="col-md-10 form-group">
+            <label for="limit">Records per Page</label>
+            <input [(ngModel)]="limit" id="limit"
+                   #limitInp = "ngModel" type="number"
+                   class="form-control">
+        </div>
+        <div class="col-md-2">
             <button class="btn btn-success" (click)="getRecords()">
                 <i class="fa fa-refresh" aria-hidden="true"></i> Refresh
             </button>

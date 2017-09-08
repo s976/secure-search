@@ -17,13 +17,15 @@ var JournalComponent = (function () {
     function JournalComponent(journalService) {
         this.journalService = journalService;
         this.records = [];
+        this.limit = 10;
+        this.page = 1;
     }
     JournalComponent.prototype.ngOnInit = function () {
         this.getRecords();
     };
     JournalComponent.prototype.getRecords = function () {
         var _this = this;
-        this.journalService.getRecords()
+        this.journalService.getRecords({ limit: this.limit, page: this.page })
             .then(function (records) { return _this.records = records; }, function (error) {
             console.error(error);
             alert('Server error');
