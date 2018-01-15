@@ -20,6 +20,7 @@ var HomeComponent = (function () {
     }
     HomeComponent.prototype.search = function (key) {
         var _this = this;
+        this.descriptionMsg = '';
         this.docsService.searchDocs(key)
             .then(function (docs) {
             console.log(docs);
@@ -29,6 +30,25 @@ var HomeComponent = (function () {
     HomeComponent.prototype.outputResults = function (results) {
         this.resultDocs = results.docs;
         this.resultMessage = results.message;
+        this.descriptionMsg = "Поиск: <strong>" + this.keyword + "</strong>";
+        if (results.docs.length == 0) {
+            this.descriptionMsg += "<p><i class=\"fa fa-frown-o\" aria-hidden=\"true\"></i> Ничего не нашли...</p>";
+        }
+        else {
+            this.descriptionMsg += "<p>Количество документов: " + results.docs.length + "</p>";
+        }
+    };
+    HomeComponent.prototype.bindNoteClick = function (event) {
+        if (event.target.tagName === 'A' && event.target.href.indexOf('#footnote') != -1) {
+            event.preventDefault();
+            alert('Сноски (пока) так смотреть нельзя. Извините.');
+        }
+    };
+    HomeComponent.prototype.ngOnInit = function () {
+        document.addEventListener('click', this.bindNoteClick);
+    };
+    HomeComponent.prototype.ngOnDestroy = function () {
+        document.removeEventListener('click', this.bindNoteClick);
     };
     HomeComponent = __decorate([
         core_1.Component({

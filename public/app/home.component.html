@@ -9,6 +9,11 @@
     </div>
 </form>
 
+<div class="row" *ngIf="descriptionMsg">
+    <div class="alert alert-info" [innerHtml]="descriptionMsg">
+    </div>
+</div>
+
 <div class="row" *ngIf="resultMessage">
 <div class="alert alert-warning" [innerHtml]="resultMessage"></div>
 </div>
