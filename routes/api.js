@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const settings = require('../settings');
+var fs = require('fs');
 
 var multer  = require('multer');
 
@@ -9,10 +10,11 @@ var Doc = require('../libs/doc');
 var Journal = require('../libs/journal');
 
 var PrepareRes = require('../libs/prepare');
+var Utils = require('../libs/utils');
 var permissions = require('../libs/permissions');
-//k
 
-if (settings.SECURE_API){ //На время разработки можно не проверять подключенность
+
+if (!fs.existsSync('c:\\xampp')){ //На время разработки (на локалке) можно не проверять подключенность
     router.use(function(req,res,next){
         if(req.isAuthenticated()){
             next();
@@ -299,6 +301,32 @@ router.post('/journal',function(req,res,next){
                 res.json(records);
             }
         });
+
+});
+
+
+/* Utils API */
+router.post('/utils', function(req, res, next) {
+    var fileName = req.body.fileName;
+    var utilType = req.body.type;
+    var regex = new RegExp(fileName,'gi');
+    Doc.find({file_name: regex} ,function(err,docs){
+        if(err){
+            res.status(400).json({errMessage:err.message});
+            return false;
+        }
+        if(!docs){
+            res.status(400).json({errMessage:'Document not found'});
+            return false;
+        }
+        var utilsResult = 'no';
+        var utils = new Utils(docs);
+        utilsResult = utils.italic();
+        res.json(utilsResult);
+    });
+
+
+    //TODO: найти нужные результаты (по имени файла и типу {fileName: "Мегила", type: "italic"})
 
 });
 

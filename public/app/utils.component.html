@@ -1,0 +1,23 @@
+<p></p>
+<div class="row">
+    <div class="col-md-3">
+        <input [(ngModel)]="fileName" name="fileName" id="fileName"
+               #userNameInp="ngModel"
+               type="text" class="form-control" placeholder="Часть имени файла">
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-success" (click)="utilsSearch('italic')">
+            Наклонный
+        </button>
+    </div>
+
+    <div class="col-md-3">
+        <button class="btn btn-success" (click)="utilsSearch('underline')">
+            Подчеркнутый
+        </button>
+    </div>
+</div>
+kuku
+<div class="row">
+<span class="label label-info" *ngFor="let occ of occurrences">{{occ.word}}</span>
+</div>

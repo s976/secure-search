@@ -14,6 +14,7 @@ import {UsersService} from "./users.service";
 import {HomeComponent} from "./home.component";
 import { ManageDocsComponent } from './manage-docs.component';
 import { JournalComponent } from './journal.component';
+import { UtilsComponent } from './utils.component';
 import {DocsService} from "./docs.service";
 import {JournalService} from "./journal.service";
 
@@ -33,6 +34,7 @@ import {JournalService} from "./journal.service";
       HomeComponent,
       ManageDocsComponent,
       JournalComponent,
+      UtilsComponent,
       FileSelectDirective,
       FileDropDirective
   ],

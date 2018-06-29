@@ -2,7 +2,7 @@
  * Created by shimon on 13/02/2017.
  */
 import { Injectable } from '@angular/core';
-import { Doc } from './doc';
+import {Doc, Occurrence, UtilsResult} from './doc';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -10,6 +10,7 @@ import 'rxjs/add/operator/toPromise';
 export class DocsService{
     private docsUrl = 'api/docs';
     private searchUrl = 'api/search';
+    private utilsUrl = 'api/utils';
 
     constructor(private http: Http){}
 
@@ -69,6 +70,17 @@ export class DocsService{
             .then(
                 response=>this.transformResponse(response),
                 error=>{
+                    throw error.json();
+                }
+            );
+    }
+
+    searchUtils(args : any) : Promise<UtilsResult>{
+        return this.http.post(this.utilsUrl, args)
+            .toPromise()
+            .then(
+                response => this.transformResponse(response),
+                error => {
                     throw error.json();
                 }
             );

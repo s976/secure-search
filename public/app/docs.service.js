@@ -19,6 +19,7 @@ var DocsService = (function () {
         this.http = http;
         this.docsUrl = 'api/docs';
         this.searchUrl = 'api/search';
+        this.utilsUrl = 'api/utils';
     }
     /**
      * Transform date fields from ISODate to local time string
@@ -65,6 +66,14 @@ var DocsService = (function () {
     DocsService.prototype.searchDocs = function (key) {
         var _this = this;
         return this.http.get(this.searchUrl + '/' + key)
+            .toPromise()
+            .then(function (response) { return _this.transformResponse(response); }, function (error) {
+            throw error.json();
+        });
+    };
+    DocsService.prototype.searchUtils = function (args) {
+        var _this = this;
+        return this.http.post(this.utilsUrl, args)
             .toPromise()
             .then(function (response) { return _this.transformResponse(response); }, function (error) {
             throw error.json();

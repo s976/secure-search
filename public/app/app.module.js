@@ -21,6 +21,7 @@ var users_service_1 = require("./users.service");
 var home_component_1 = require("./home.component");
 var manage_docs_component_1 = require('./manage-docs.component');
 var journal_component_1 = require('./journal.component');
+var utils_component_1 = require('./utils.component');
 var docs_service_1 = require("./docs.service");
 var journal_service_1 = require("./journal.service");
 var AppModule = (function () {
@@ -41,6 +42,7 @@ var AppModule = (function () {
                 home_component_1.HomeComponent,
                 manage_docs_component_1.ManageDocsComponent,
                 journal_component_1.JournalComponent,
+                utils_component_1.UtilsComponent,
                 ng2_file_upload_1.FileSelectDirective,
                 ng2_file_upload_1.FileDropDirective
             ],

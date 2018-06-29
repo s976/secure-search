@@ -17,3 +17,15 @@ export class Doc {
     uploaded_at    : string;
     updated_at     : string;
 }
+
+export interface Occurrence{
+    word:string,
+    fileNames:string[],
+    count:number
+}
+
+export interface UtilsResult{
+    allOccurrences : Occurrence[],
+    docs : any,
+    message : any
+}
