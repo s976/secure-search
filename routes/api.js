@@ -146,6 +146,7 @@ var upload = multer({
 }).single('file');
 
 
+
 router.post('/file', upload, function(req,res,next){
     if(!permissions.accessOnlyForRole(req,res,4,'Upload File')){
         return false;
@@ -159,6 +160,8 @@ router.post('/file', upload, function(req,res,next){
         }
     });
 });
+
+
 
 /*     DOCS API    */
 router.use('/docs',function (req,res,next) {
@@ -321,7 +324,12 @@ router.post('/utils', function(req, res, next) {
         }
         var utilsResult = 'no';
         var utils = new Utils(docs);
-        utilsResult = utils.italic();
+        if (utilType === 'underline'){
+            utilsResult = utils.italicAndUnerline('underline');
+        } else {
+            utilsResult = utils.italicAndUnerline('italic');
+        }
+
         res.json(utilsResult);
     });
 

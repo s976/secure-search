@@ -77,8 +77,13 @@ docSchema.statics.findByKey = function(key,cb){
 
 docSchema.statics.addFile = function(fileObj,cb){
     var self = this;
+    var options = {
+        styleMap: [
+            "u => u"
+        ]
+    };
 
-    mammoth.convertToHtml( {path: fileObj.path} ) //Convert .docx to html
+    mammoth.convertToHtml( {path: fileObj.path}, options ) //Convert .docx to html
         .then(
             function(result){
                 if(!result.value){

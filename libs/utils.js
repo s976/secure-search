@@ -12,15 +12,19 @@ function Utils(docs) {
     };
 }
 
-Utils.prototype.italic = function () {
+Utils.prototype.italicAndUnerline = function (type) {
     var that = this;
     this.docs.forEach(function (doc) {
         //console.log(doc.html_formatted);
         var regItalic = /<em>.*?<\/em>/gmi;
-        var words = doc.html_formatted.match(regItalic);
+        var regUnderline = /<u>.*?<\/u>/gmi;
+        var regType = (type==='underline')?regUnderline:regItalic;
+        var words = doc.html_formatted.match(regType);
         if (!words) return;
+
+        var regClean = (type==='underline')?/(<u>\s*)(.*?)([,.;:–?!\s]*<\/u>)/mi:/(<em>\s*)(.*?)([,.;:–?!\s]*<\/em>)/mi;
+
         words = words.map(function (word) {
-           var regClean = /(<em>\s*)(.*?)([,.;:–?!\s]*<\/em>)/mi;
            var result =word.match(regClean);
            result = result[2];
            return result;
