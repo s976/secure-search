@@ -21,7 +21,8 @@ export class Doc {
 export interface Occurrence{
     word:string,
     fileNames:string[],
-    count:number
+    count:number,
+    id:number
 }
 
 export interface UtilsResult{

@@ -8,13 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by shimon on 04/12/2016.
  */
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-require('rxjs/add/operator/toPromise');
-var UsersService = (function () {
+require("rxjs/add/operator/toPromise");
+var UsersService = /** @class */ (function () {
     function UsersService(http) {
         this.http = http;
         this.usersUrl = 'api/users';
@@ -57,7 +58,7 @@ var UsersService = (function () {
             .toPromise()
             .then(function (response) { return response.json(); }, //on success
         function (//on success
-            error) {
+        error) {
             throw error.json();
         });
     };
@@ -72,7 +73,7 @@ var UsersService = (function () {
             .toPromise()
             .then(function (response) { return response.json(); }, //on success
         function (//on success
-            error) {
+        error) {
             throw error.json();
         });
     };
@@ -91,8 +92,8 @@ var UsersService = (function () {
             .then(function (response) { return response.json(); }, function (error) { throw error.json(); });
     };
     UsersService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
     ], UsersService);
     return UsersService;
 }());

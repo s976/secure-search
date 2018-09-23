@@ -8,16 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by shimon on 18/01/2017.
  */
-var core_1 = require('@angular/core');
-var ng2_file_upload_1 = require('ng2-file-upload/ng2-file-upload');
-var docs_service_1 = require('./docs.service');
+var core_1 = require("@angular/core");
+var ng2_file_upload_1 = require("ng2-file-upload/ng2-file-upload");
+var docs_service_1 = require("./docs.service");
 var doc_1 = require("./doc");
 var ng2_bootstrap_1 = require("ng2-bootstrap/ng2-bootstrap");
 var URL = 'api/file';
-var ManageDocsComponent = (function () {
+var ManageDocsComponent = /** @class */ (function () {
     function ManageDocsComponent(docsService) {
         this.docsService = docsService;
         this.docs = [];
@@ -82,16 +83,16 @@ var ManageDocsComponent = (function () {
         this.hasBaseDropZoneOver = e;
     };
     __decorate([
-        core_1.ViewChild('docModal'), 
-        __metadata('design:type', ng2_bootstrap_1.ModalDirective)
+        core_1.ViewChild('docModal'),
+        __metadata("design:type", ng2_bootstrap_1.ModalDirective)
     ], ManageDocsComponent.prototype, "docModal", void 0);
     ManageDocsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'manage-docs',
             templateUrl: 'manage-docs.component.html',
-        }), 
-        __metadata('design:paramtypes', [docs_service_1.DocsService])
+        }),
+        __metadata("design:paramtypes", [docs_service_1.DocsService])
     ], ManageDocsComponent);
     return ManageDocsComponent;
 }());

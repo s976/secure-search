@@ -8,12 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by shimon on 05/12/2016.
  */
-var core_1 = require('@angular/core');
-var docs_service_1 = require('./docs.service');
-var HomeComponent = (function () {
+var core_1 = require("@angular/core");
+var docs_service_1 = require("./docs.service");
+var HomeComponent = /** @class */ (function () {
     function HomeComponent(docsService) {
         this.docsService = docsService;
         this.searchUrl = 'api/search';
@@ -55,8 +56,8 @@ var HomeComponent = (function () {
             moduleId: module.id,
             selector: 'home',
             templateUrl: 'home.component.html'
-        }), 
-        __metadata('design:paramtypes', [docs_service_1.DocsService])
+        }),
+        __metadata("design:paramtypes", [docs_service_1.DocsService])
     ], HomeComponent);
     return HomeComponent;
 }());

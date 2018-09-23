@@ -17,7 +17,11 @@
         </button>
     </div>
 </div>
-kuku
-<div class="row">
-<span class="label label-info" *ngFor="let occ of occurrences">{{occ.word}}</span>
+
+<div class="container">
+    <span *ngFor="let occ of occurrences" class="shs-u-w">
+        <span [innerHtml]="occ.word"></span> ({{occ.count}}) <span class="fa fa-files-o shs-info"
+                                                                   [attr.el-id]="occ.id"
+                                                                   aria-hidden="true"></span>
+    </span>
 </div>

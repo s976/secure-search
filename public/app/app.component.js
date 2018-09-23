@@ -8,9 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
-var AppComponent = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var ng2_bootstrap_1 = require("ng2-bootstrap/ng2-bootstrap");
+var AppComponent = /** @class */ (function () {
     function AppComponent(viewContainerRef) {
         // You need this small hack in order to catch application root view container ref
         this.viewContainerRef = viewContainerRef;
@@ -20,8 +21,8 @@ var AppComponent = (function () {
             moduleId: module.id,
             selector: 'my-app',
             templateUrl: 'app.component.html',
-        }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef])
+        }),
+        __metadata("design:paramtypes", [core_1.ViewContainerRef])
     ], AppComponent);
     return AppComponent;
 }());

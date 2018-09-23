@@ -6734,3 +6734,31 @@ a.active {
   color: #fff !important;
   background-color: #080808 !important;
 }
+
+.shs-u-w{
+  font-size: 100%;
+  display: inline-block;
+  border: 1px solid #9d9d9d;
+  padding: 3px 5px;
+  margin: 3px 4px;
+  background-color: #f5f5f5;
+  border-radius: 3px;
+}
+
+.shs-info{
+  position: relative;
+}
+
+.file-names-table{
+  position: absolute;
+  left: 20px;
+  top:-30px;
+  background-color: #fff;
+  z-index: 10;
+  padding: 10px;
+  white-space: nowrap;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}

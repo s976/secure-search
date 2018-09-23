@@ -8,14 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by shimon on 04/12/2016.
  */
-var core_1 = require('@angular/core');
-var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
+var core_1 = require("@angular/core");
+var ng2_bootstrap_1 = require("ng2-bootstrap/ng2-bootstrap");
 var users_service_1 = require("./users.service");
 var user_1 = require("./user");
-var UsersComponent = (function () {
+var UsersComponent = /** @class */ (function () {
     function UsersComponent(usersService) {
         this.usersService = usersService;
         this.users = [];
@@ -135,28 +136,28 @@ var UsersComponent = (function () {
         });
     };
     __decorate([
-        core_1.ViewChild('editModal'), 
-        __metadata('design:type', ng2_bootstrap_1.ModalDirective)
+        core_1.ViewChild('editModal'),
+        __metadata("design:type", ng2_bootstrap_1.ModalDirective)
     ], UsersComponent.prototype, "editModal", void 0);
     __decorate([
-        core_1.ViewChild('addModal'), 
-        __metadata('design:type', ng2_bootstrap_1.ModalDirective)
+        core_1.ViewChild('addModal'),
+        __metadata("design:type", ng2_bootstrap_1.ModalDirective)
     ], UsersComponent.prototype, "addModal", void 0);
     __decorate([
-        core_1.ViewChild('nameInp'), 
-        __metadata('design:type', Object)
+        core_1.ViewChild('nameInp'),
+        __metadata("design:type", Object)
     ], UsersComponent.prototype, "nameInp", void 0);
     __decorate([
-        core_1.ViewChild('editForm'), 
-        __metadata('design:type', Object)
+        core_1.ViewChild('editForm'),
+        __metadata("design:type", Object)
     ], UsersComponent.prototype, "editForm", void 0);
     UsersComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'users',
             templateUrl: 'users.component.html'
-        }), 
-        __metadata('design:paramtypes', [users_service_1.UsersService])
+        }),
+        __metadata("design:paramtypes", [users_service_1.UsersService])
     ], UsersComponent);
     return UsersComponent;
 }());

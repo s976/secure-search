@@ -8,12 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by shimon on 02/06/2017.
  */
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var journal_service_1 = require("./journal.service");
-var JournalComponent = (function () {
+var JournalComponent = /** @class */ (function () {
     function JournalComponent(journalService) {
         this.journalService = journalService;
         this.records = [];
@@ -40,8 +41,8 @@ var JournalComponent = (function () {
             moduleId: module.id,
             selector: 'journal',
             templateUrl: 'journal.component.html',
-        }), 
-        __metadata('design:paramtypes', [journal_service_1.JournalService])
+        }),
+        __metadata("design:paramtypes", [journal_service_1.JournalService])
     ], JournalComponent);
     return JournalComponent;
 }());

@@ -8,13 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by shimon on 13/02/2017.
  */
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-require('rxjs/add/operator/toPromise');
-var DocsService = (function () {
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/toPromise");
+var DocsService = /** @class */ (function () {
     function DocsService(http) {
         this.http = http;
         this.docsUrl = 'api/docs';
@@ -54,7 +55,7 @@ var DocsService = (function () {
             .toPromise()
             .then(function (response) { return _this.transformResponse(response); }, //on success
         function (//on success
-            error) {
+        error) {
             throw error.json();
         });
     };
@@ -80,8 +81,8 @@ var DocsService = (function () {
         });
     };
     DocsService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
     ], DocsService);
     return DocsService;
 }());

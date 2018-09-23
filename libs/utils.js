@@ -15,8 +15,10 @@ function Utils(docs) {
 Utils.prototype.italic = function () {
     var that = this;
     this.docs.forEach(function (doc) {
+        //console.log(doc.html_formatted);
         var regItalic = /<em>.*?<\/em>/gmi;
         var words = doc.html_formatted.match(regItalic);
+        if (!words) return;
         words = words.map(function (word) {
            var regClean = /(<em>\s*)(.*?)([,.;:–?!\s]*<\/em>)/mi;
            var result =word.match(regClean);
@@ -43,7 +45,7 @@ Utils.prototype.italic = function () {
  * @param {obj[]} arr
  */
 function removeDuplicatesAndCount(arr){
-    var res = [];
+    let res = [];
     arr.forEach(function (item,i,arr) {
         var index = res.findIndex(function(elem){
             return elem.word === item.word;
@@ -66,6 +68,10 @@ function removeDuplicatesAndCount(arr){
            return -1;
        else
            return 1;
+    });
+    res = res.map(function (el,key) { //Add id for each element (for front use)
+        el.id = key;
+       return el;
     });
     return res;
 }
